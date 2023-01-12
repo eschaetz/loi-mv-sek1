@@ -106,6 +106,25 @@ namespace LOI_MV {
     }
     
     /**
+     * Gibt an, wie sehr der Roboter nach vorn und hinten geneigt ist (positive Werte: Nase zeigt nach oben; negative Werte: Nase zeigt nach unten)
+     */
+    //% blockId=loimvPitch
+    //% block="pitch"
+    export function pitch(): number {
+        return -(input.rotation(Rotation.Pitch))
+    }
+
+    /**
+     * Gibt die seitliche Neigung des ROboters an (positive Werte: nach rechts geneigt; negative Werte: nach links geneigt)
+     */
+    //% blockId=loimvRoll
+    //% block="roll"
+    export function roll(): number {
+        return -(input.rotation(Rotation.Roll))
+    }
+
+
+    /**
      * Fährt den Roboter korrekt hoch
      */
     //% blockId=loimvInit
@@ -113,16 +132,15 @@ namespace LOI_MV {
     export function init(kompass: boolean): void {
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
-        if (kompass){
+        if (kompass) {
             basic.pause(input.compassHeading())
-        }        
+        }
         I2C_LCD1602.LcdInit(0)
         antrieb(0, 0)
         I2C_LCD1602.ShowString("Landesolympiade", 0, 0)
         I2C_LCD1602.ShowString("Informatik MV", 1, 1)
         basic.pause(300)
     }
-
 
 
 }
