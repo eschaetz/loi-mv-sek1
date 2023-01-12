@@ -111,7 +111,7 @@ namespace LOI_MV {
     //% blockId=loimvPitch
     //% block="pitch"
     export function pitch(): number {
-        return -(input.rotation(Rotation.Pitch))
+        return -(input.rotation(Rotation.Pitch))+3
     }
 
     /**
