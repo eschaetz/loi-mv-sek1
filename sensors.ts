@@ -14,7 +14,7 @@ namespace Sensoren {
         }
 
         get_filtered() {
-            return this.filter.current()
+            return this.filter.get_current()
         }
 
         get_unfiltered() {
