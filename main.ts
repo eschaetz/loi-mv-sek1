@@ -160,7 +160,7 @@ namespace LOI_MV {
 
 
         ultraschall_obj = new Sensoren.Ultraschallsensor(DigitalPin.P8, DigitalPin.P9, 2, 400)
-        ultraschall_obj.set_filter(filter)
+        ultraschall_obj.set_filter_list(filter)
 
         if (ultra) {
             ultraschall_obj.calibration()
