@@ -170,7 +170,7 @@ namespace LOI_MV {
             while (true) {
                 ultraschall_obj.update()
 
-                basic.pause(5)
+                basic.pause(20)
             }
         })
     }
