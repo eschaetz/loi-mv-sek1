@@ -10,7 +10,7 @@ namespace LOI_MV {
     export function ultraschall(): number {
         //return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
         console.log(ultraschall_obj.filter.current)
-        return ultraschall_obj.get_filtered()
+        return Math.round(ultraschall_obj.get_filtered())
     }
     /**
      * Steuert die Antriebsmotoren mit den Parametern "Power" und "Lenkung".
