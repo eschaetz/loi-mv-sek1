@@ -169,6 +169,8 @@ namespace LOI_MV {
         control.runInBackground(function () {
             while (true) {
                 ultraschall_obj.update()
+
+                basic.pause(5)
             }
         })
     }
