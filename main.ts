@@ -159,7 +159,7 @@ namespace LOI_MV {
         I2C_LCD1602.ShowString("Informatik MV", 1, 1)
 
 
-        ultraschall_obj = new Sensoren.Ultraschallsensor(DigitalPin.P8, DigitalPin.P9, 2, 400)
+        ultraschall_obj = new Sensoren.Ultraschallsensor(DigitalPin.P8, DigitalPin.P9, 2, 400, 0.64375)
         ultraschall_obj.set_filter_list(filter)
 
         if (ultra) {
