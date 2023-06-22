@@ -1,13 +1,15 @@
 
 
 namespace LOI_MV {
+    let ultraschall_obj: any;
     /**
      * Test-Funktion
      */
     //% blockId=loimvUltraschall
     //% block="ultraschall"
     export function ultraschall(): number {
-        return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
+        //return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
+        return ultraschall_obj.get_filtered()
     }
     /**
      * Steuert die Antriebsmotoren mit den Parametern "Power" und "Lenkung".
@@ -129,7 +131,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvInit
     //% block="init %kompass"
-    export function init(kompass: boolean): void {
+    /**export function init(kompass: boolean): void {
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
         if (kompass) {
@@ -141,6 +143,34 @@ namespace LOI_MV {
         I2C_LCD1602.ShowString("Informatik MV", 1, 1)
         basic.pause(300)
     }
+    */
+    export function init(kompass: boolean, ultra: boolean, filter: Filterlist): void {
+        let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
+        strip.showColor(neopixel.colors(NeoPixelColors.Red))
+        if (kompass) {
+            basic.pause(input.compassHeading())
+        }
 
+
+        I2C_LCD1602.LcdInit(0)
+        antrieb(0, 0)
+        I2C_LCD1602.ShowString("Landesolympiade", 0, 0)
+        I2C_LCD1602.ShowString("Informatik MV", 1, 1)
+
+
+        ultraschall_obj = new Sensoren.Ultraschallsensor(DigitalPin.P8, DigitalPin.P9, 2, 400)
+        ultraschall_obj.set_filter_list(filter)
+
+        if (ultra) {
+            ultraschall_obj.calibration()
+        }
+
+        basic.pause(300)
+        control.runInBackground(function () {
+            while (true) {
+                ultraschall_obj.update()
+            }
+        })
+    }
 
 }
