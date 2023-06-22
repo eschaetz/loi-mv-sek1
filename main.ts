@@ -130,7 +130,7 @@ namespace LOI_MV {
      * Fährt den Roboter korrekt hoch
      */
     //% blockId=loimvInit
-    //% block="init %kompass| calibrateUltraschall %ultra| filter %filter"
+    //% block="init kompass %kompass| calibrateUltraschall %ultra| filter %filter"
     /**export function init(kompass: boolean): void {
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
