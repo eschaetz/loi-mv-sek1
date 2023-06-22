@@ -164,6 +164,9 @@ namespace LOI_MV {
 
         if (ultra) {
             ultraschall_obj.calibration()
+            basic.pause(300)
+            I2C_LCD1602.ShowString("Landesolympiade", 0, 0)
+            I2C_LCD1602.ShowString("Informatik MV", 1, 1)
         }
 
         basic.pause(300)
