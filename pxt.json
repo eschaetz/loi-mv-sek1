@@ -14,7 +14,8 @@
         "main.ts",
         "README.md",
         "filter.ts",
-        "sensors.ts"
+        "sensors.ts",
+        "filterlist.ts"
     ],
     "testFiles": [
         "test.ts"
