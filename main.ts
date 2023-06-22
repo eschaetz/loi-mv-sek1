@@ -9,6 +9,7 @@ namespace LOI_MV {
     //% block="ultraschall"
     export function ultraschall(): number {
         //return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
+        console.log(ultraschall_obj.filter.current)
         return ultraschall_obj.get_filtered()
     }
     /**
