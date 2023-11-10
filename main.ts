@@ -1,13 +1,22 @@
 
 
 namespace LOI_MV {
-    let ultraschall_obj: any;
     /**
-     * Test-Funktion
+     * Ultraschall 
      */
     //% blockId=loimvUltraschall
     //% block="ultraschall"
     export function ultraschall(): number {
+        return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
+    }
+
+    let ultraschall_obj: any;
+    /**
+     * Ultraschall Advanced
+     */
+    //% blockId=loimvUltraschallAdvanced
+    //% block="ultraschall_advanced"
+    export function ultraschall_advanced(): number {
         //return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
         console.log(ultraschall_obj.filter.current)
         return Math.round(ultraschall_obj.get_filtered())
@@ -131,8 +140,8 @@ namespace LOI_MV {
      * Fährt den Roboter korrekt hoch
      */
     //% blockId=loimvInit
-    //% block="init kompass %kompass| calibrateUltraschall %ultra| filter %filter"
-    /**export function init(kompass: boolean): void {
+    //% block="init kompass %kompass"
+    export function init(kompass: boolean): void {
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
         if (kompass) {
@@ -144,8 +153,13 @@ namespace LOI_MV {
         I2C_LCD1602.ShowString("Informatik MV", 1, 1)
         basic.pause(300)
     }
-    */
-    export function init(kompass: boolean, ultra: boolean, filter: Filterlist): void {
+
+    /**
+     * Fährt den Roboter korrekt hoch und hat zusätzliche Funktoinen
+     */
+    //% blockId=loimvInitAdvanced
+    //% block="init_advanced kompass %kompass| calibrateUltraschall %ultra| filter %filter"
+    export function init_advanced(kompass: boolean, ultra: boolean, filter: Filterlist): void {
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
         if (kompass) {
