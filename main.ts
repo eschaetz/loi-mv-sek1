@@ -201,7 +201,7 @@ namespace LOI_MV {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="&#x1F3AE;"
+//% weight=100 color=#0fbc11 icon="\0xF0"
 namespace LOI_Remote {
     /**
      * Knopf A gedrückt
