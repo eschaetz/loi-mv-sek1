@@ -1,8 +1,9 @@
 
 /**
  * Custom blocks
+ * block = LOI MV
  */
-//% weight=100 color=#0fbc11 icon="🕿"
+//% weight=100 color=#00BFFF icon="🕿"
 namespace LOI_MV {
     /**
      * Ultraschall 
