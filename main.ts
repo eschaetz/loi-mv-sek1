@@ -201,19 +201,60 @@ namespace LOI_MV {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="🎮"
+//% weight=100 color=#0fbc11 icon="🕹"
 namespace LOI_Remote {
     /**
      * Knopf A gedrückt
      */
     //% blockId=loimvbuttonA
-    //% block="Anopf A"
+    //% block="Knopf A"
     export function knopf_a(): boolean {
         if (pins.digitalReadPin(DigitalPin.P5) == 1){
             return true
         }
         else {
             return false    
+        }
+    }
+
+    /**
+     * Knopf B gedrückt
+     */
+    //% blockId=loimvbuttonB
+    //% block="Knopf B"
+    export function knopf_b(): boolean {
+        if (pins.digitalReadPin(DigitalPin.P11) == 1) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+
+    /**
+     * Knopf C gedrückt
+     */
+    //% blockId=loimvbuttonC
+    //% block="Knopf C"
+    export function knopf_c(): boolean {
+        if (pins.digitalReadPin(DigitalPin.P8) == 1) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    /**
+     * Knopf D gedrückt
+     */
+    //% blockId=loimvbuttonD
+    //% block="Knopf D"
+    export function knopf_d(): boolean {
+        if (pins.digitalReadPin(DigitalPin.P12) == 1) {
+            return true
+        }
+        else {
+            return false
         }
     }
 }
