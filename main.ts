@@ -1,5 +1,8 @@
 
-
+/**
+ * Custom blocks
+ */
+//% weight=100 color=#0fbc11 icon="🤖"
 namespace LOI_MV {
     /**
      * Ultraschall 
@@ -193,4 +196,24 @@ namespace LOI_MV {
         })
     }
 
+}
+
+/**
+ * Custom blocks
+ */
+//% weight=100 color=#0fbc11 icon="🎮"
+namespace LOI_Remote {
+    /**
+     * Knopf A gedrückt
+     */
+    //% blockId=loimvbuttonA
+    //% block="Anopf A"
+    export function knopf_a(): boolean {
+        if (pins.digitalReadPin(DigitalPin.P5) == 1){
+            return true
+        }
+        else {
+            return false    
+        }
+    }
 }
