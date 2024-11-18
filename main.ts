@@ -1,7 +1,7 @@
 
 /**
  * Custom blocks
- * block = LOI MV
+ * block = "LOI MV"
  */
 //% weight=100 color=#00BFFF icon="🕿"
 namespace LOI_MV {
