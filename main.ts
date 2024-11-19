@@ -230,7 +230,8 @@ namespace LOI_Remote {
     //% blockId=loimvbuttonA
     //% block="Knopf A"
     export function knopf_a(): boolean {
-        if (pins.digitalReadPin(DigitalPin.P5) == 1){
+        pins.digitalWritePin(DigitalPin.P5, 1)
+        if (pins.digitalReadPin(DigitalPin.P5) == 0){
             return true
         }
         else {
@@ -244,7 +245,8 @@ namespace LOI_Remote {
     //% blockId=loimvbuttonB
     //% block="Knopf B"
     export function knopf_b(): boolean {
-        if (pins.digitalReadPin(DigitalPin.P11) == 1) {
+        pins.digitalWritePin(DigitalPin.P11, 1)
+        if (pins.digitalReadPin(DigitalPin.P11) == 0) {
             return true
         }
         else {
@@ -258,7 +260,8 @@ namespace LOI_Remote {
     //% blockId=loimvbuttonC
     //% block="Knopf C"
     export function knopf_c(): boolean {
-        if (pins.digitalReadPin(DigitalPin.P8) == 1) {
+        pins.digitalWritePin(DigitalPin.P8, 1)
+        if (pins.digitalReadPin(DigitalPin.P8) == 0) {
             return true
         }
         else {
@@ -271,7 +274,8 @@ namespace LOI_Remote {
     //% blockId=loimvbuttonD
     //% block="Knopf D"
     export function knopf_d(): boolean {
-        if (pins.digitalReadPin(DigitalPin.P12) == 1) {
+        pins.digitalWritePin(DigitalPin.P12, 1)
+        if (pins.digitalReadPin(DigitalPin.P12) == 0) {
             return true
         }
         else {
