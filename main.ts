@@ -196,6 +196,27 @@ namespace LOI_MV {
         })
     }
 
+    /**
+     * Fährt den Roboter korrekt hoch und hat zusätzliche Funktoinen
+     */
+    //% blockId=loimvSensorausgabe
+    //% block="Sensor-Ausgabe Intervall %intervall"
+    export function sensor_ausgabe(intervall: number): void {
+
+        I2C_LCD1602.clear()
+        I2C_LCD1602.ShowString(" Sensorausgabe", 0, 0)
+        
+        control.runInBackground(function () {
+            while (true) {                
+                I2C_LCD1602.ShowNumber(LOI_MV.helligkeitLinks(), 0, 1)
+                I2C_LCD1602.ShowNumber(LOI_MV.helligkeitRechts(), 15, 1)
+                I2C_LCD1602.ShowString("    ", 6, 1)
+                I2C_LCD1602.ShowNumber(LOI_MV.ultraschall(), 6, 1)
+                basic.pause(intervall)
+            }
+        })
+    }
+
 }
 
 /**
