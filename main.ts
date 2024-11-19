@@ -210,8 +210,8 @@ namespace LOI_MV {
             while (true) {                
                 I2C_LCD1602.ShowNumber(LOI_MV.helligkeitLinks(), 0, 1)
                 I2C_LCD1602.ShowNumber(LOI_MV.helligkeitRechts(), 15, 1)
-                I2C_LCD1602.ShowString("    ", 6, 1)
-                I2C_LCD1602.ShowNumber(LOI_MV.ultraschall(), 6, 1)
+                I2C_LCD1602.ShowString("    ", 7, 1)
+                I2C_LCD1602.ShowNumber(LOI_MV.ultraschall(), 7, 1)
                 basic.pause(intervall)
             }
         })
