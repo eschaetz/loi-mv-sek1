@@ -197,7 +197,7 @@ namespace LOI_MV {
     }
 
     /**
-     * Fährt den Roboter korrekt hoch und hat zusätzliche Funktoinen
+     * Gibt die Sensorwerte dauerhaft auf dem Display aus
      */
     //% blockId=loimvSensorausgabe
     //% block="Sensor-Ausgabe Intervall %intervall"
