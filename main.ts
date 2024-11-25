@@ -282,4 +282,39 @@ namespace LOI_Remote {
             return false
         }
     }
+
+    /**
+     * Baggersteuerung
+     */
+    //% blockId=loimvbagger
+    //% block="Baggersteuerung %links %rechts"
+    export function baggersteuerung(links:number, rechts:number): void{
+        let motorMin = 400
+        if (links>0) {
+            pins.digitalWritePin(DigitalPin.P12, 0)
+            pins.digitalWritePin(DigitalPin.P13, 1)
+            pins.analogWritePin(AnalogPin.P1, Math.map(links, 0, 10, motorMin, 1023))
+        } else if (links<0) {
+            pins.digitalWritePin(DigitalPin.P12, 1)
+            pins.digitalWritePin(DigitalPin.P13, 0)
+            pins.analogWritePin(AnalogPin.P1, Math.map(links, 0, -10, motorMin, 1023))
+        } else {
+            pins.digitalWritePin(DigitalPin.P12, 0)
+            pins.digitalWritePin(DigitalPin.P13, 0)
+        }
+
+        if (rechts > 0) {
+            pins.digitalWritePin(DigitalPin.P14, 0)
+            pins.digitalWritePin(DigitalPin.P15, 1)
+            pins.analogWritePin(AnalogPin.P1, Math.map(rechts, 0, 10, motorMin, 1023))
+        } else if (rechts < 0) {
+            pins.digitalWritePin(DigitalPin.P14, 1)
+            pins.digitalWritePin(DigitalPin.P15, 0)
+            pins.analogWritePin(AnalogPin.P1, Math.map(rechts, 0, -10, motorMin, 1023))
+        } else {
+            pins.digitalWritePin(DigitalPin.P14, 0)
+            pins.digitalWritePin(DigitalPin.P15, 0)
+        }
+
+    }
 }
