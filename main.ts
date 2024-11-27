@@ -27,11 +27,11 @@ namespace LOI_MV {
         if (rechts > 0) {
             pins.digitalWritePin(DigitalPin.P14, 0)
             pins.digitalWritePin(DigitalPin.P15, 1)
-            pins.analogWritePin(AnalogPin.P1, Math.map(rechts, 0, 10, motorMin, 1023))
+            pins.analogWritePin(AnalogPin.P2, Math.map(rechts, 0, 10, motorMin, 1023))
         } else if (rechts < 0) {
             pins.digitalWritePin(DigitalPin.P14, 1)
             pins.digitalWritePin(DigitalPin.P15, 0)
-            pins.analogWritePin(AnalogPin.P1, Math.map(rechts, 0, -10, motorMin, 1023))
+            pins.analogWritePin(AnalogPin.P2, Math.map(rechts, 0, -10, motorMin, 1023))
         } else {
             pins.digitalWritePin(DigitalPin.P14, 0)
             pins.digitalWritePin(DigitalPin.P15, 0)
