@@ -9,7 +9,7 @@ enum Linetracker {
 /**
  * Custom blocks
  */
-//% weight=100 color=#00BFFF icon="\uf1b9" block="LOI MV - Roboter"
+//% weight=2000 color=#00BFFF icon="\uf1b9" block="LOI MV - Roboter"
 namespace LOI_MV {
     /**
      * Baggersteuerung
@@ -294,7 +294,7 @@ namespace LOI_MV {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="\uf11b" block="LOI MV - Fernbedienung"
+//% weight=1900 color=#0fbc11 icon="\uf11b" block="LOI MV - Fernbedienung"
 namespace LOI_Remote {
     /**
      * Knopf A gedrückt
