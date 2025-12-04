@@ -1,8 +1,15 @@
+enum Linetracker {
+    //% block="links"
+    LT0 = DigitalPin.P6,
 
+    //% block="rechts"
+    LT1 = DigitalPin.P7,
+
+}
 /**
  * Custom blocks
  */
-//% weight=100 color=#00BFFF icon="⏩" block="LOI MV - Roboter"
+//% weight=100 color=#00BFFF icon="\uf1b9" block="LOI MV - Roboter"
 namespace LOI_MV {
     /**
      * Baggersteuerung
@@ -66,7 +73,7 @@ namespace LOI_MV {
      * -10 ist links, 0 gerade aus und 10 rechts
      */
     //% blockId=loimvAntrieb
-    //% block="Setze Geschwindigkeit auf:%power und Lenkugn auf:%lenkung"
+    //% block="Setze Geschwindigkeit auf:%power und Lenkung auf:%lenkung"
     //% power.min=-10 power.max=10
     //% lenkung.min=-10 lenkung.max=10
     export function antrieb(power: number, lenkung: number): void {
@@ -108,14 +115,7 @@ namespace LOI_MV {
         }
     }
 
-    enum Linetracker {
-        //% block="links"
-        LT0 = DigitalPin.P6,
-
-        //% block="rechts"
-        LT1 = DigitalPin.P7,
-
-    }
+    
 
 
     /**
@@ -123,7 +123,7 @@ namespace LOI_MV {
      */
     //%blockId=loimvlinetracking
     //%block="schwarzer Untergrund %linetracker erkannt"
-    export function linetracking(linetracker:Linetracker){
+    export function linetracking(linetracker: Linetracker): boolean{
         let s = pins.digitalReadPin(linetracker);
         return !!s;
     }
@@ -284,7 +284,7 @@ namespace LOI_MV {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="\f11b" block="LOI MV - Fernbedienung"
+//% weight=100 color=#0fbc11 icon="\uf11b" block="LOI MV - Fernbedienung"
 namespace LOI_Remote {
     /**
      * Knopf A gedrückt
