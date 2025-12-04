@@ -284,7 +284,7 @@ namespace LOI_MV {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="🎮" block="LOi MV - Fernbedienung"
+//% weight=100 color=#0fbc11 icon="\f11b" block="LOI MV - Fernbedienung"
 namespace LOI_Remote {
     /**
      * Knopf A gedrückt
