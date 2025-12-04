@@ -6,6 +6,7 @@ enum Linetracker {
     LT1 = DigitalPin.P7,
 
 }
+
 /**
  * Custom blocks
  */
@@ -130,6 +131,17 @@ namespace LOI_MV {
     export function linetracking(linetracker: Linetracker): boolean{
         let s = pins.digitalReadPin(linetracker);
         return !!s;
+    }
+
+    /**
+     * Setzt gesamten Neopixel auf eine beliebige Farbe
+     */
+    //%blockId=loimvnneo
+    //%block="Zeige Farbe %color mit dem Neopixel"
+    //% weight=599
+    export function neopixels(color: NeoPixelColors): void {
+        let s = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
+        s.showColor(neopixel.colors(color))
     }
 
 
