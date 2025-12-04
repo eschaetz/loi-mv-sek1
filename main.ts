@@ -43,7 +43,7 @@ namespace LOI_MV {
      * Ultraschall 
      */
     //% blockId=loimvUltraschall
-    //% block="ultraschall"
+    //% block="gemessene Distanz"
     export function ultraschall(): number {
         return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
     }
@@ -54,7 +54,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvUltraschallAdvanced
     //% block="ultraschall_advanced"
-    export function ultraschall_advanced(): number {
+    function ultraschall_advanced(): number {
         //return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
         console.log(ultraschall_obj.filter.current)
         return Math.round(ultraschall_obj.get_filtered())
@@ -66,7 +66,7 @@ namespace LOI_MV {
      * -10 ist links, 0 gerade aus und 10 rechts
      */
     //% blockId=loimvAntrieb
-    //% block="antrieb %power %lenkung"
+    //% block="Setze Geschwindigkeit auf:%power und Lenkugn auf:%lenkung"
     //% power.min=-10 power.max=10
     //% lenkung.min=-10 lenkung.max=10
     export function antrieb(power: number, lenkung: number): void {
@@ -107,12 +107,34 @@ namespace LOI_MV {
             pins.analogWritePin(AnalogPin.P2, 0)
         }
     }
+
+    enum Linetracker {
+        //% block="links"
+        LT0 = DigitalPin.P6,
+
+        //% block="rechts"
+        LT1 = DigitalPin.P7,
+
+    }
+
+
     /**
+     * Gibt aus, pb der gewählte Linetrackingsensor schwarzen UNtergrund erkennt
+     */
+    //%blockId=loimvlinetracking
+    //%block="schwarzer Untergrund %linetracker erkannt"
+    export function linetracking(linetracker:Linetracker){
+        let s = pins.digitalReadPin(linetracker);
+        return !!s;
+    }
+
+
+    /** 
      * Gibt des Wert des rechten Helligkeitssensors aus
      */
     //% blockId=loimvHelligkeitRechts
-    //% block="helligkeitRechts"
-    export function helligkeitRechts(): number {
+    //% block=""
+    function helligkeitRechts(): number {
         return pins.digitalReadPin(DigitalPin.P7)
     }
 
@@ -121,7 +143,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvHelligkeitLinks
     //% block="helligkeitLinks"
-    export function helligkeitLinks(): number {
+    function helligkeitLinks(): number {
         return pins.digitalReadPin(DigitalPin.P6)
     }
 
@@ -132,7 +154,7 @@ namespace LOI_MV {
     //% block="Graddrehung %drehung %toleranz"
     //% drehung.min=-180 drehung.max=180
     //%toleranz.min=5 toleranz.max=20
-    export function graddrehung(drehung: number, toleranz: number): void {
+    function graddrehung(drehung: number, toleranz: number): void {
         antrieb(0, 0)
         let zielrichtung = (input.compassHeading() + drehung) % 360
         let i = 0
@@ -159,7 +181,7 @@ namespace LOI_MV {
      * Gibt an, wie sehr der Roboter nach vorn und hinten geneigt ist (positive Werte: Nase zeigt nach oben; negative Werte: Nase zeigt nach unten)
      */
     //% blockId=loimvPitch
-    //% block="pitch"
+    //% block="Längsneigung"
     export function pitch(): number {
         return -(input.rotation(Rotation.Pitch))+3
     }
@@ -168,7 +190,7 @@ namespace LOI_MV {
      * Gibt die seitliche Neigung des ROboters an (positive Werte: nach rechts geneigt; negative Werte: nach links geneigt)
      */
     //% blockId=loimvRoll
-    //% block="roll"
+    //% block="Querneigung"
     export function roll(): number {
         return -(input.rotation(Rotation.Roll))
     }
@@ -178,13 +200,13 @@ namespace LOI_MV {
      * Fährt den Roboter korrekt hoch
      */
     //% blockId=loimvInit
-    //% block="init kompass %kompass"
-    export function init(kompass: boolean): void {
+    //% block="Roboter hochfahren"
+    export function init(): void { //kompass: boolean
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
-        if (kompass) {
-            basic.pause(input.compassHeading())
-        }
+        //if (kompass) {
+        //    basic.pause(input.compassHeading())
+        //}
         I2C_LCD1602.LcdInit(0)
         antrieb(0, 0)
         I2C_LCD1602.ShowString("Landesolympiade", 0, 0)
@@ -197,7 +219,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvInitAdvanced
     //% block="init_advanced kompass %kompass| calibrateUltraschall %ultra| filter %filter"
-    export function init_advanced(kompass: boolean, ultra: boolean, filter: Filterlist): void {
+    function init_advanced(kompass: boolean, ultra: boolean, filter: Filterlist): void {
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
         if (kompass) {
@@ -231,6 +253,11 @@ namespace LOI_MV {
         })
     }
 
+    function BooltoString(boo:boolean): string{
+        if (boo) return "W";
+        else return "F"  
+    }
+
     /**
      * Gibt die Sensorwerte dauerhaft auf dem Display aus
      */
@@ -243,8 +270,8 @@ namespace LOI_MV {
         
         control.runInBackground(function () {
             while (true) {                
-                I2C_LCD1602.ShowNumber(LOI_MV.helligkeitLinks(), 0, 1)
-                I2C_LCD1602.ShowNumber(LOI_MV.helligkeitRechts(), 15, 1)
+                I2C_LCD1602.ShowString(BooltoString(LOI_MV.linetracking(Linetracker.LT0)), 0, 1)
+                I2C_LCD1602.ShowString(BooltoString(LOI_MV.linetracking(Linetracker.LT1)), 15, 1)
                 I2C_LCD1602.ShowString("    ", 7, 1)
                 I2C_LCD1602.ShowNumber(LOI_MV.ultraschall(), 7, 1)
                 basic.pause(intervall)
@@ -257,13 +284,13 @@ namespace LOI_MV {
 /**
  * Custom blocks
  */
-//% weight=100 color=#0fbc11 icon="🎮"
+//% weight=100 color=#0fbc11 icon="🎮" block="LOi MV - Fernbedienung"
 namespace LOI_Remote {
     /**
      * Knopf A gedrückt
      */
     //% blockId=loimvbuttonA
-    //% block="Knopf A"
+    //% block="Knopf A ist gedrückt"
     export function knopf_a(): boolean {
         pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P5) == 0){
@@ -278,7 +305,7 @@ namespace LOI_Remote {
      * Knopf B gedrückt
      */
     //% blockId=loimvbuttonB
-    //% block="Knopf B"
+    //% block="Knopf B ist gedrückt"
     export function knopf_b(): boolean {
         pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P11) == 0) {
@@ -293,7 +320,7 @@ namespace LOI_Remote {
      * Knopf C gedrückt
      */
     //% blockId=loimvbuttonC
-    //% block="Knopf C"
+    //% block="Knopf C ist gedrückt"
     export function knopf_c(): boolean {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P8) == 0) {
@@ -307,7 +334,7 @@ namespace LOI_Remote {
      * Knopf D gedrückt
      */
     //% blockId=loimvbuttonD
-    //% block="Knopf D"
+    //% block="Knopf D ist gedrückt"
     export function knopf_d(): boolean {
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P12) == 0) {
