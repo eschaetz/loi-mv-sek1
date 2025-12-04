@@ -2,13 +2,13 @@
 /**
  * Custom blocks
  */
-//% weight=100 color=#00BFFF icon="⏩"
+//% weight=100 color=#00BFFF icon="⏩" block="LOI MV - Roboter"
 namespace LOI_MV {
     /**
      * Baggersteuerung
      */
     //% blockId=loimvbagger
-    //% block="Baggersteuerung %links %rechts"
+    //% block="Setze Motor links auf: %links und Motor rechts auf: %rechts"
     export function baggersteuerung(links: number, rechts: number): void {
         let motorMin = 400
         if (links > 0) {

@@ -7,7 +7,7 @@
         "radio": "*",
         "microphone": "*",
         "pxt-sonar": "github:microsoft/pxt-sonar#v0.0.6",
-        "neopixel": "github:microsoft/pxt-neopixel#v0.7.5",
+        "neopixel": "github:microsoft/pxt-neopixel#v0.7.6",
         "i2cLCD1602": "github:makecode-extensions/i2clcd1602#v1.5.0"
     },
     "files": [
@@ -21,7 +21,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "7.0.57",
+        "target": "8.0.18",
         "targetId": "microbit"
     },
     "supportedTargets": [
