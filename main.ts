@@ -15,7 +15,8 @@ namespace LOI_MV {
      * Baggersteuerung
      */
     //% blockId=loimvbagger
-    //% block="Setze Motor links auf: %links und Motor rechts auf: %rechts"
+    //% block="Setze Motor links auf: %links und Motor rechts auf: %rechts",
+    //% weight=800
     export function baggersteuerung(links: number, rechts: number): void {
         let motorMin = 400
         if (links > 0) {
@@ -51,6 +52,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvUltraschall
     //% block="gemessene Distanz"
+    //% weight=700
     export function ultraschall(): number {
         return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
     }
@@ -60,7 +62,7 @@ namespace LOI_MV {
      * Ultraschall Advanced
      */
     //% blockId=loimvUltraschallAdvanced
-    //% block="ultraschall_advanced"
+    //% block="ultraschall_advanced" weight=100
     function ultraschall_advanced(): number {
         //return sonar.ping(DigitalPin.P8, DigitalPin.P9, PingUnit.Centimeters)
         console.log(ultraschall_obj.filter.current)
@@ -76,6 +78,7 @@ namespace LOI_MV {
     //% block="Setze Geschwindigkeit auf:%power und Lenkung auf:%lenkung"
     //% power.min=-10 power.max=10
     //% lenkung.min=-10 lenkung.max=10
+    //% weight=900
     export function antrieb(power: number, lenkung: number): void {
         let speedL //Geschwindigkeit der linken Motoren
         let speedR //Geschwindigkeit der rechten Motoren 
@@ -119,10 +122,11 @@ namespace LOI_MV {
 
 
     /**
-     * Gibt aus, pb der gewählte Linetrackingsensor schwarzen UNtergrund erkennt
+     * Gibt aus, ob der gewählte Linetrackingsensor schwarzen Uutergrund erkennt
      */
     //%blockId=loimvlinetracking
     //%block="schwarzer Untergrund %linetracker erkannt"
+    //% weight=600
     export function linetracking(linetracker: Linetracker): boolean{
         let s = pins.digitalReadPin(linetracker);
         return !!s;
@@ -133,7 +137,8 @@ namespace LOI_MV {
      * Gibt des Wert des rechten Helligkeitssensors aus
      */
     //% blockId=loimvHelligkeitRechts
-    //% block=""
+    //% block="helligkeitRechts"
+    
     function helligkeitRechts(): number {
         return pins.digitalReadPin(DigitalPin.P7)
     }
@@ -154,6 +159,7 @@ namespace LOI_MV {
     //% block="Graddrehung %drehung %toleranz"
     //% drehung.min=-180 drehung.max=180
     //%toleranz.min=5 toleranz.max=20
+    //% weight=100
     function graddrehung(drehung: number, toleranz: number): void {
         antrieb(0, 0)
         let zielrichtung = (input.compassHeading() + drehung) % 360
@@ -182,6 +188,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvPitch
     //% block="Längsneigung"
+    //% weight=400
     export function pitch(): number {
         return -(input.rotation(Rotation.Pitch))+3
     }
@@ -191,6 +198,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvRoll
     //% block="Querneigung"
+    //% weight=300
     export function roll(): number {
         return -(input.rotation(Rotation.Roll))
     }
@@ -201,6 +209,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvInit
     //% block="Roboter hochfahren"
+    //% weight=1000
     export function init(): void { //kompass: boolean
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
@@ -263,6 +272,7 @@ namespace LOI_MV {
      */
     //% blockId=loimvSensorausgabe
     //% block="Sensor-Ausgabe Intervall %intervall"
+    //% weight=500
     export function sensor_ausgabe(intervall: number): void {
 
         I2C_LCD1602.clear()
@@ -291,6 +301,7 @@ namespace LOI_Remote {
      */
     //% blockId=loimvbuttonA
     //% block="Knopf A ist gedrückt"
+    //% weight=100
     export function knopf_a(): boolean {
         pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P5) == 0){
@@ -306,6 +317,7 @@ namespace LOI_Remote {
      */
     //% blockId=loimvbuttonB
     //% block="Knopf B ist gedrückt"
+    //% weight=90
     export function knopf_b(): boolean {
         pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P11) == 0) {
@@ -321,6 +333,7 @@ namespace LOI_Remote {
      */
     //% blockId=loimvbuttonC
     //% block="Knopf C ist gedrückt"
+    //% weight=80
     export function knopf_c(): boolean {
         pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P8) == 0) {
@@ -335,6 +348,7 @@ namespace LOI_Remote {
      */
     //% blockId=loimvbuttonD
     //% block="Knopf D ist gedrückt"
+    //% weight=70
     export function knopf_d(): boolean {
         pins.setPull(DigitalPin.P12, PinPullMode.PullUp)
         if (pins.digitalReadPin(DigitalPin.P12) == 0) {
