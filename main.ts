@@ -128,7 +128,7 @@ namespace LOI_MV {
     //%blockId=loimvlinetracking
     //%block="schwarzer Untergrund %linetracker erkannt"
     //% weight=600
-    export function linetracking(linetracker: Linetracker): boolean{
+    export function linetracking(linetracker: Linetracker): number{
         let s = pins.digitalReadPin(linetracker);
         return !!s;
     }
@@ -225,6 +225,7 @@ namespace LOI_MV {
     export function init(): void { //kompass: boolean
         let strip = neopixel.create(DigitalPin.P16, 8, NeoPixelMode.RGB)
         strip.showColor(neopixel.colors(NeoPixelColors.Red))
+        led.enable(false);
         //if (kompass) {
         //    basic.pause(input.compassHeading())
         //}
@@ -292,8 +293,8 @@ namespace LOI_MV {
         
         control.runInBackground(function () {
             while (true) {                
-                I2C_LCD1602.ShowString(BooltoString(LOI_MV.linetracking(Linetracker.LT0)), 0, 1)
-                I2C_LCD1602.ShowString(BooltoString(LOI_MV.linetracking(Linetracker.LT1)), 15, 1)
+                //I2C_LCD1602.ShowString(BooltoString(LOI_MV.linetracking(Linetracker.LT0)), 0, 1)
+                //I2C_LCD1602.ShowString(BooltoString(LOI_MV.linetracking(Linetracker.LT1)), 15, 1)
                 I2C_LCD1602.ShowString("    ", 7, 1)
                 I2C_LCD1602.ShowNumber(LOI_MV.ultraschall(), 7, 1)
                 basic.pause(intervall)
