@@ -27,14 +27,6 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 ---
 
 
-##### Roboter hochfahren
-
-Die Distanzmessung wird mit den rechten Ultraschallsensor durchgeführt.
-
-```blocks
-   init()
-```
-
 
 #### Metadaten (verwendet für Suche, Rendering)
 
