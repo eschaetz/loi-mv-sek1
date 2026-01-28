@@ -128,7 +128,7 @@ namespace LOI_MV {
     //%blockId=loimvlinetracking
     //%block="schwarzer Untergrund %linetracker erkannt"
     //% weight=600
-    export function linetracking(linetracker: Linetracker): number{
+    export function linetracking(linetracker: Linetracker): boolean{
         let s = pins.digitalReadPin(linetracker);
         return !!s;
     }
